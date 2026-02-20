@@ -6,18 +6,15 @@ import { Loading } from './Loading'
 
 export function CustomHook() {
     const  {counter, decrement, increment, reset} = useCounter(1);
-    const { data, hasError, isLoading } = useFetch(`https://pokeapi.co/api/v2/pokemon/${counter}`);
+    const { data, hasError, isLoading } = useFetch(`https://thesimpsonsapi.com/api/characters/${counter}`);
   return (
     <>
-        <h1>Fetch API de Pokemon</h1>
+        <h1>Fetch API de Simpson</h1>
         <hr/>
-        <h2>{data?.name}</h2>
+        <h2>Personaje #{counter}</h2>
         {isLoading ? <Loading/>
         : (<Card id={counter} name={data.name} sprites={ [
-        data.sprites.front_default,
-        data.sprites.front_shiny,
-        data.sprites.back_default,
-        data.sprites.back_shiny,
+        data.portrait_path,
         ] } />)}
         <button className='btn btn-primary' onClick= { ()=>decrement() } >Anterior</button>
         <button className='btn btn-primary' onClick= { ()=>increment() } >Siguiente</button>
