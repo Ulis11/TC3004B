@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Hola = () => {
+function Prueba3() {
   return (
     <div>Hola Mundo Tec</div>
   )
 }
 
-export default Hola
+export default Prueba3
