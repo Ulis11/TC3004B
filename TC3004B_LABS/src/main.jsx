@@ -1,13 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
-import Message from './lab3/components/Message.jsx'
-import SimpleForm from './lab3/components/SimpleForm.jsx';
-import Focus from './lab3/components/Focus.jsx'
+import Focus from './lab3/components/Focus';
+import { ExpertApp } from './api-GIF/ExpertApp';
+import { FormularioLogin } from './lab3/components/FormularioLogin';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Focus/>
+    <FormularioLogin />
   </StrictMode>,
 )

@@ -42,5 +42,3 @@ export const SimpleForm = () => {
       </>
   )
 }
-
-export default SimpleForm
