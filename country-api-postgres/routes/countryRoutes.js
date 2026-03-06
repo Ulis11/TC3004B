@@ -1,11 +1,13 @@
 const express = require('express');
-const countryController = require('../controllers/countryController');
+const employeeController = require('../controllers/countryController');
+
 const router = express.Router();
 
-// Rutas para los países
-router.get('/', countryController.getAllCountries);
-router.get('/:id', countryController.getCountryById);
-router.post('/', countryController.createCountry);
-router.put('/:id', countryController.updateCountry);
-router.delete('/:id', countryController.deleteCountry);
+// Rutas para los empleados
+router.get('/', employeeController.getAllEmployees);
+router.get('/:id', employeeController.getEmployeeById);
+router.post('/', employeeController.createEmployee);
+router.put('/:id', employeeController.updateEmployee);
+router.delete('/:id', employeeController.deleteEmployee);
+
 module.exports = router;
