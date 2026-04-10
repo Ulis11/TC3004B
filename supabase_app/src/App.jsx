@@ -1,7 +1,6 @@
-import { useState } from 'react'
 import { useEffect, useState } from "react";
 import "./App.css";
-import supabase from './supabase-client';
+import supabase from '../supabase-client';
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
@@ -16,7 +15,7 @@ function App() {
   }, []);
 
   const consulta = async () => {
-    const { data, error } = await supabase.from("tareas").select("*");
+    const { data, error } = await supabase.from("Reservas").select("*");
     console.log(data);
     if (error) {
       console.log("Error de conexion en consulta: ", error);
@@ -26,7 +25,7 @@ function App() {
   };
 
   const fetchTodos = async () => {
-    const { data, error } = await supabase.from("TodoList").select("*");
+    const { data, error } = await supabase.from("Reservas").select("*");
     if (error) {
       console.log("Error fetching: ", error);
     } else {
@@ -35,11 +34,11 @@ function App() {
   };
   const addTodo = async () => {
     const newTodoData = {
-      name: newTodo,
-      isCompleted: false,
+      reservation: newTodo,
+      isReserved: true,
     };
     const { data, error } = await supabase
-      .from("TodoList")
+      .from("Reservas")
       .insert([newTodoData])
       .single();
     if (error) {
@@ -51,21 +50,21 @@ function App() {
   };
   const completeTask = async (id, isCompleted) => {
     const { data, error } = await supabase
-      .from("TodoList")
-      .update({ isCompleted: !isCompleted })
+      .from("Reservas")
+      .update({ isReserved: !isCompleted })
       .eq("id", id);
     if (error) {
       console.log("error toggling task: ", error);
     } else {
       const updatedTodoList = todoList.map((todo) =>
-        todo.id === id ? { ...todo, isCompleted: !isCompleted } : todo
+        todo.id === id ? { ...todo, isReserved: !isCompleted } : todo
       );
       setTodoList(updatedTodoList);
     }
   };
   const deleteTask = async (id) => {
     const { data, error } = await supabase
-      .from("TodoList")
+      .from("Reservas")
       .delete()
       .eq("id", id);
     if (error) {
@@ -78,25 +77,25 @@ function App() {
   return (
     <div>
       {" "}
-      <h1>Todo List</h1>
+      <h1>Reservations list</h1>
       <div>
         <input
           type="text"
-          placeholder="New Todo..."
+          placeholder="New Reservation..."
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
         />
-        <button onClick={addTodo}> Add Todo Item</button>
+        <button onClick={addTodo}> Add Reservation</button>
       </div>
       <ul>
         {todoList.map((todo) => (
-          <li>
-            <p> {todo.name}</p>
-            <button onClick={() => completeTask(todo.id, todo.isCompleted)}>
+          <li key={todo.id}>
+            <p> {todo.reservation}</p>
+            <button onClick={() => completeTask(todo.id, todo.isReserved)}>
               {" "}
-              {todo.isCompleted ? "Undo" : "Complete Task"}
+              {todo.isReserved ? "Undo" : "Complete Reservation"}
             </button>
-            <button onClick={() => deleteTask(todo.id)}> Delete Task</button>
+            <button onClick={() => deleteTask(todo.id)}> Delete Reservation</button>
           </li>
         ))}
       </ul>
